@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-staceyrb89-djangoblog-3c1wixgr5nl.ws-eu106.gitpod.io', '.herokuapp.com']
+ALLOWED_HOSTS = ['8000-staceyrb89-djangoblog-wgq91k064na.ws-eu106.gitpod.io', '.herokuapp.com']
 
 
 # Application definition
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_summernote',
     'blog',
+    'about',
 ]
 
 MIDDLEWARE = [

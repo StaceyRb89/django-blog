@@ -2,6 +2,14 @@
 
 {% block content %}
 
+{% for event in event_list %}
+<a href="{% url 'event_detail' event.event_id %}">
+    <h2>{{ event.event_name }}</h2>
+</a>
+{% endfor %}
+
+{% block content %}
+
 <!-- index.html content starts here -->
 <div class="container-fluid">
     <div class="row">
@@ -46,6 +54,8 @@
                 <a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV</a>
             </li>
             {% endif %}
+
+
             {% if page_obj.has_next %}
             <li>
                 <a href="?page={{ page_obj.next_page_number }}" class="page-link">NEXT &raquo;</a>

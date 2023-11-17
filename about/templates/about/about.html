@@ -1,32 +1,15 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
 <div class="container mt-5">
     <div class="row">
-        <div class="col-4 text-center">
-            <img src="{% static 'images/nobody.jpg' %}" width="75%" />
+        <div class="col-12 col-md-4 text-center">
+            <img src="{% static 'images/nobody.jpg' %}" width="75%">
         </div>
-        <div class="col-8">
-            <!-- Title goes between these h2 tags -->
+        <div class="col-12 col-md-8">
             <h2>{{ about.title }}</h2>
-            <h2>Stacey Robson</h2>
-            <p>Embarking on the journey of learning Django has been an odyssey marked by pain, sweat, and tears—an
-                expedition into the unknown realms of web development. Each line of code written, a testament to the
-                countless hours spent unraveling the intricacies of Django's framework. Through the countless trials and
-                errors, my perseverance has become the foundation upon which my understanding of this powerful tool has
-                been built.
-                <br>
-                The pain was the echo of every bug encountered, the frustration of hitting roadblocks, and the dogged
-                determination to overcome them. Sweat dripped from my brow as I wrestled with concepts, debugged, and
-                crafted intricate solutions. Tears flowed in moments of both triumph and defeat—a poignant reminder of
-                the emotional investment in this learning endeavor.
-                <br>
-                This journey has been a surprise to us all, an unpredictable adventure where the joy of conquering
-                challenges is only surpassed by the realization of newfound capabilities. From the first hesitant steps
-                to crafting complex applications, the evolution is a testament to the resilience fostered in the
-                crucible of coding. As I navigate the path ahead, the pain, sweat, and tears have become the indelible
-                ink inscribing my narrative of mastering Django—an odyssey well worth the struggle.
-            </p>
             {{ about.content | safe }}
         </div>
     </div>
@@ -34,7 +17,25 @@
         <div class="col text-right">
             <!-- Updated on field goes in here -->
 
-            <p class="text-end"><em>Updated on: 17.11.2023 {{ about.updated_on }}</em></p>
+            <p class="text-end"><em>Updated on: {{ about.updated_on }}</em></p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 my-5">
+            <h2>Let's collaborate!</h2>
+            <p>I believe in the power of shared knowledge and collective effort.
+                Whether you have a project in mind, wish to co-author
+                an article, or simply want to brainstorm some ideas,
+                I'm excited to hear from you. Fill out the form
+                and we can get the ball rolling!</p>
+
+            <!-- add your form here. Your submit button should 
+                                have the classes of btn, btn-secondary -->
+            <form method="post">
+                {{ collaborate_form | crispy }}
+                {% csrf_token %}
+                <button class="btn btn-secondary" type="submit">Submit</button>
+            </form>
         </div>
     </div>
 </div>

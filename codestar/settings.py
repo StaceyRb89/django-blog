@@ -30,9 +30,9 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['8000-staceyrb89-djangoblog-wgq91k064na.ws-eu106.gitpod.io', '.herokuapp.com']
+ALLOWED_HOSTS = ['8000-staceyrb89-djangoblog-s32kedhdo17.ws-eu106.gitpod.io', '.herokuapp.com']
 
 
 # Application definition
@@ -44,10 +44,26 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'django_summernote',
     'blog',
     'about',
 ]
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+# Note: We need to add a SITE_ID of 1 so that Django can handle multiple sites from one database. 
+# We need to give each project an ID value so that the database is aware of which project is 
+# contacting it. We only have one site here using our one database, but we'll still need to tell 
+# Django the site number of 1 explicitly.
+
+# The redirection URLs are also added so that after we've logged in or logged out, the site 
+# will automatically redirect us to the home page.
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -58,6 +74,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'codestar.urls'
@@ -117,7 +134,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+#Note: We are not using email verification in this project, so this line informs 
+# Django not to expect it. Without this line, you would get Internal Server errors 
+# (code 500) during login and registration.
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
